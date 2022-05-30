@@ -36,7 +36,6 @@ int main(int argc, char *argv[]) {
   if (Copies.size() == 1 && Copies[0] == "Failed.") {
     std::cout << "Something went wrong." << std::endl;
   } else {
-    std::cout << "Done." << std::endl;
     printSVec(Copies);
   }
 }

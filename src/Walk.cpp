@@ -40,7 +40,6 @@ void getFiles(const std::string path, svec &files) {
     if (fs::is_regular_file((fs::path)entry) &&
         !isExe(fs::status(entry).permissions())) {
       files.push_back(entry.path());
-      /* std::cout << entry << std::endl; */
     }
   }
 }
