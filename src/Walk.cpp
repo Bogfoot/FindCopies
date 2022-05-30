@@ -37,10 +37,10 @@ void findCopies(svec &Source, svec &Target, svec &Copies) {
 
 void getFiles(const std::string path, svec &files) {
   for (const auto &entry : fs::recursive_directory_iterator(path)) {
-    if (fs::is_regular_file((fs::path)entry) ||
+    if (fs::is_regular_file((fs::path)entry) &&
         !isExe(fs::status(entry).permissions())) {
       files.push_back(entry.path());
-      std::cout << entry << std::endl;
+      /* std::cout << entry << std::endl; */
     }
   }
 }

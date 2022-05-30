@@ -32,12 +32,11 @@ int main(int argc, char *argv[]) {
   svec inFiles, outFiles;
   std::string inPath = argv[1], outPath = argv[2];
   svec Copies = FindCopies(inPath, inFiles, outPath, outFiles);
-  printSVec(inFiles);
-  printSVec(outFiles);
 
   if (Copies.size() == 1 && Copies[0] == "Failed.") {
     std::cout << "Something went wrong." << std::endl;
   } else {
+    std::cout << "Done." << std::endl;
     printSVec(Copies);
   }
 }
