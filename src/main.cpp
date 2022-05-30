@@ -6,6 +6,8 @@ void printSVec(svec &files) {
   }
 }
 
+void spin() { std::cout << "spin." << std::endl; }
+
 int main(int argc, char *argv[]) {
   if (argc == 1) {
     std::cout << "Usage:\n"
