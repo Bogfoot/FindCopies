@@ -5,21 +5,20 @@ Treba compileati s " -lstdc++fs", također je ok compileati sa -std=c++17
 // Moji includeovi
 #include "Walk.h"
 
-svec FindCopies(const std::string inPath, svec &inFiles,
-                const std::string outPath, svec &outFiles) {
-  svec Copies;
+void FindCopies(const std::string inPath, svec &inFiles,
+                const std::string outPath, svec &outFiles, svec &Copies) {
   if (!fs::is_directory((fs::path)inPath) ||
       !fs::is_directory((fs::path)outPath)) {
     std::cout << "Either [Target] or [Source] is not a path to a directory."
               << std::endl;
-    return Copies;
+    is_finished = true;
+    Copies.push_back("Failed.");
+    return;
   }
   getFiles(inPath, inFiles);
   getFiles(outPath, outFiles);
   findCopies(inFiles, outFiles, Copies);
-  if (Copies.size() == 0)
-    std::cout << "No copies were found." << std::endl;
-  return Copies;
+  is_finished = true;
 }
 
 void findCopies(svec &Source, svec &Target, svec &Copies) {
@@ -49,4 +48,18 @@ bool isExe(fs::perms p) {
     return true;
   else
     return false;
+}
+
+void spin() {
+  char spinner[] = {'/', '-', '\\', '|'};
+  int i = 0;
+  while (!is_finished) {
+    fflush(stdout);
+    std::cout << spinner[i];
+    std::cout << "\b";
+    std::this_thread::sleep_for(500us);
+    i++;
+    if (i == 4)
+      i = 0;
+  }
 }

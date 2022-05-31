@@ -6,8 +6,6 @@ void printSVec(svec &files) {
   }
 }
 
-void spin() { std::cout << "spin." << std::endl; }
-
 int main(int argc, char *argv[]) {
   if (argc == 1) {
     std::cout << "Usage:\n"
@@ -31,12 +29,17 @@ int main(int argc, char *argv[]) {
     return 3;
   }
 
-  svec inFiles, outFiles;
+  svec inFiles, outFiles, Copies;
   std::string inPath = argv[1], outPath = argv[2];
-  svec Copies = FindCopies(inPath, inFiles, outPath, outFiles);
+  std::thread w1(FindCopies, inPath, std::ref(inFiles), outPath,
+                 std::ref(outFiles), std::ref(Copies));
+  std::thread w2(spin);
+  /* FindCopies(inPath, inFiles, outPath, outFiles, Copies); */
+  /* spin(); */
 
-  if (Copies.size() == 1 && Copies[0] == "Failed.") {
-    std::cout << "Something went wrong." << std::endl;
+  if (Copies.size() == 0)
+    std::cout << "No copies were found." << std::endl;
+  else if (Copies.size() == 1 && Copies[0] == "Failed.") {
   } else {
     printSVec(Copies);
   }
