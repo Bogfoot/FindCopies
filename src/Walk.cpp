@@ -22,6 +22,7 @@ void FindCopies(const std::string inPath, svec &inFiles,
 }
 
 void findCopies(svec &Source, svec &Target, svec &Copies) {
+  // Implement a solution with std::map by key fs::path(SFile).filename
   for (const auto &SFile : Source) {
     for (const auto &TFile : Target) {
       if (fs::absolute((fs::path)SFile) == fs::absolute((fs::path)TFile))
@@ -56,8 +57,8 @@ void spin() {
   while (!is_finished) {
     fflush(stdout);
     std::cout << spinner[i];
-    std::cout << "\b";
-    std::this_thread::sleep_for(500us);
+    std::cout << "\r";
+    std::this_thread::sleep_for(100ms);
     i++;
     if (i == 9)
       i = 0;
