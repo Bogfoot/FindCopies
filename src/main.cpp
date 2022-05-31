@@ -31,11 +31,11 @@ int main(int argc, char *argv[]) {
 
   svec inFiles, outFiles, Copies;
   std::string inPath = argv[1], outPath = argv[2];
-  std::thread w1(FindCopies, inPath, std::ref(inFiles), outPath,
-                 std::ref(outFiles), std::ref(Copies));
-  std::thread w2(spin);
-  /* FindCopies(inPath, inFiles, outPath, outFiles, Copies); */
-  /* spin(); */
+  /* std::thread w1(FindCopies, inPath, std::ref(inFiles), outPath, */
+  /*                std::ref(outFiles), std::ref(Copies)); */
+  /* std::thread w2(spin); */
+  FindCopies(inPath, inFiles, outPath, outFiles, Copies);
+  spin();
 
   if (Copies.size() == 0)
     std::cout << "No copies were found." << std::endl;

@@ -51,7 +51,7 @@ bool isExe(fs::perms p) {
 }
 
 void spin() {
-  char spinner[] = {'/', '-', '\\', '|'};
+  char spinner[] = {'|', '/', '-', '\\', '|', '/', '-', '\\', 'O'};
   int i = 0;
   while (!is_finished) {
     fflush(stdout);
@@ -59,7 +59,7 @@ void spin() {
     std::cout << "\b";
     std::this_thread::sleep_for(500us);
     i++;
-    if (i == 4)
+    if (i == 9)
       i = 0;
   }
 }
